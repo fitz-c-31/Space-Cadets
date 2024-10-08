@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 //start of program
 class Main {
@@ -27,12 +29,16 @@ class Main {
         email="https://www.ecs.soton.ac.uk/people/"+email;
         InputStream data =null;
 
-        try{
+
             //open the url
-            URL url = new URL(email);
-            URLConnection connection = url.openConnection();
-            //scrape the data from the webpage
-            data = connection.getInputStream();
+            URL url = null;
+            try {
+                url = new URI(email).toURL();
+                URLConnection connection = url.openConnection();
+                //scrape the data from the webpage
+                data = connection.getInputStream();
+            } catch (URISyntaxException e) {
+                System.out.println("Error: " + e);
             } catch(MalformedURLException e){
                 System.out.println("Error: " + e);
             } catch(IOException e) {
