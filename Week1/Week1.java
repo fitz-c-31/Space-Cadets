@@ -29,7 +29,6 @@ class Main {
         email="https://www.ecs.soton.ac.uk/people/"+email;
         InputStream data =null;
 
-
             //open the url
             URL url = null;
             try {
